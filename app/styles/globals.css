@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer utilities {
   .paddingX {
@@ -235,3 +240,31 @@
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
   }
 }
+
+
+/* Extrass */
+
+/* .glass-card {
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+.glass-modal {
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.18);
+}
+.glass-section {
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.17);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+}
+.font-montserrat {
+    font-family: 'Poppins', sans-serif;
+} */

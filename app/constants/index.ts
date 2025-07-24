@@ -143,43 +143,35 @@ const testimonials = [
 	{
 		id: 1,
 		testimonial:
-			"Behance is a social media platform owned by Adobe whose main focus is to showcase and discover creative work.",
-		name: "Om Patel",
+			"Saheb was entrusted with creating an Alumni Management Portal for our Centre for Journalism & Mass Communications. The platform is modern, clean, and features an intuitive admin panel, which received a lot of praise from colleagues, alumni, and students alike. We are extremely pleased with his work, as he demonstrated professionalism, experience, and a strong understanding of client needs.",
+		name: "Abhilash Boruah, Asst. Professor, CSJMC.",
 		image: "/socialmedia/behance.svg",
 		link: "https://www.behance.net/omthecreator",
 	},
 	{
 		id: 2,
 		testimonial:
-			"LinkedIn is a business and employment-focused social media platform that works through websites and mobile apps.",
-		name: "Om Patel",
+			"Saheb developed a comprehensive Journal Management System with a fully functional admin panel and streamlined workflows. The process involved multiple iterations and three meetings with our faculty panel. Saheb and his team member Kalyan consistently implemented the features we requested, ensuring everything was completed to perfection. The system is now operational, efficiently handling submissions and simplifying the entire workflow.",
+		name: "H. K. Sharma, Assam Pharmacy Council",
 		image: "/socialmedia/linkedin.svg",
 		link: "https://www.linkedin.com/in/om-patel-401068143/",
 	},
 	{
 		id: 3,
 		testimonial:
-			"Dribbble is a self-promotion and social networking platform for digital designers and creatives. It serves as a design portfolio.",
-		name: "Om Patel",
+			"Saheb created a complete Interns and HR Management System, enabling seamless access to all the websites they built (around 15 websites, including Journal Management and Alumni Management systems). The system, developed using both MERN and PHP stacks, was delivered ahead of schedule and included excellent maintenance support for all projects. Along with his teammate Kalyan, Saheb also developed the Digital Solutions Cell website, which perfectly manages interns and client workflows. The design and functionality are precisely what we needed.",
+		name: "Dr. Rizwan Rehman, Asst. Professor",
 		image: "/socialmedia/dribble.svg",
 		link: "https://dribbble.com/om2121",
 	},
 	{
 		id: 4,
 		testimonial:
-			"Also do check out my UI/UX Portfolio where I have shared by design studies.",
-		name: "Om Patel",
+			"We approached Saheb and his team to create a comprehensive solution that includes modules such as Payroll Management, Recruitment, Employee Welfare, Diversity and Inclusion, and Offboarding, among others. They have already delivered several completed modules and are currently working on the remaining 14 modules. Their progress is impressive, and the team has been highly efficient in ensuring the quality and functionality of the deliverables. We look forward to the completion of the entire package.",
+		name: "Aswini Dowerah, Director, Salt Brook Academy",
 		image: "/socialmedia/portfolio.svg",
 		link: "https://omthecreator.netlify.app/",
-	},
-	{
-		id: 5,
-		testimonial:
-			"Also do check out my Github Profile where I have shared all my codes from basic to advanced.",
-		name: "Om Patel",
-		image: "/tech/github.webp",
-		link: "https://github.com/omunite215",
-	},
+	}
 ];
 
 
@@ -196,7 +188,7 @@ const projects :{
 	platform: "Netlify" | "Vercel" | "Figma" | "Wordpress" | "Web"
 }[] = [
 	{
-		name: "A.V.M Auto Portfolio",
+		name: "Alumni Management System",
 		description:
 			"A Designed and developed a visually appealing and user-friendly portfolio website using WordPress.",
 		tags: [
