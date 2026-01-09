@@ -28,47 +28,51 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    // DEBUGGING: Check if env variables are loaded
+    // 1. Get IDs from Environment Variables
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const adminTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-    if (!serviceId || !templateId || !publicKey) {
-        console.error("EmailJS env variables are missing!", { serviceId, templateId, publicKey });
-        alert("Configuration Error: Email service is not configured.");
+    if (!serviceId || !adminTemplateId || !autoReplyTemplateId || !publicKey) {
+        console.error("Missing Environment Variables");
+        alert("Configuration Error: Please check API keys.");
         setLoading(false);
         return;
     }
 
-    emailjs
-      .send(
-        serviceId,
-        templateId,
-        {
-          from_name: form.name,
-          to_name: "Md Sahebullah",
-          from_email: form.email,
-          to_email: "iamsaheb786182@gmail.com",
-          message: form.message,
-        },
-        publicKey
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error("EmailJS Error:", error); // READ THIS IN CONSOLE IF IT FAILS
-          alert("Something went wrong. Please try again.");
-        }
-      );
+    // 2. Prepare the data object
+    // This object must match the {{variables}} in BOTH templates
+    const templateParams = {
+      from_name: form.name,      // Used in both templates
+      from_email: form.email,    // CRITICAL: Used for 'To Email' in Auto-Reply
+      to_name: "Md Sahebullah",  // Optional, mostly for Admin template
+      message: form.message,     // Used in both templates
+    };
+
+    // 3. Send Both Emails
+    Promise.all([
+      // Email to Admin
+      emailjs.send(serviceId, adminTemplateId, templateParams, publicKey),
+      // Email to User (Auto-Reply)
+      emailjs.send(serviceId, autoReplyTemplateId, templateParams, publicKey)
+    ])
+    .then(
+      () => {
+        setLoading(false);
+        alert("Thank you! I have received your message, and a confirmation email has been sent to you.");
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+      },
+      (error) => {
+        setLoading(false);
+        console.error("EmailJS Error:", error);
+        alert("Something went wrong. Please try again.");
+      }
+    );
   };
 
   return (
@@ -90,7 +94,7 @@ const Contact = () => {
             <input
               type="text"
               name="name"
-              required // Added required
+              required
               value={form.name}
               onChange={handleChange}
               placeholder="What's your name?"
@@ -102,7 +106,7 @@ const Contact = () => {
             <input
               type="email"
               name="email"
-              required // Added required
+              required
               value={form.email}
               onChange={handleChange}
               placeholder="What's your email?"
@@ -114,7 +118,7 @@ const Contact = () => {
             <textarea
               rows={7}
               name="message"
-              required // Added required
+              required
               value={form.message}
               onChange={handleChange}
               placeholder="What do you want to say?"
@@ -125,9 +129,9 @@ const Contact = () => {
           <button
             type="submit"
             className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl"
-            disabled={loading} // Disable button while sending
+            disabled={loading}
           >
-            {loading ? "Sending..." : "Send"} 
+            {loading ? "Sending..." : "Send"}
           </button>
         </form>
       </motion.div>
