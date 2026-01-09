@@ -28,51 +28,41 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    // 1. Get IDs from Environment Variables
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const adminTemplateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-    if (!serviceId || !adminTemplateId || !autoReplyTemplateId || !publicKey) {
+    if (!serviceId || !templateId || !publicKey) {
         console.error("Missing Environment Variables");
         alert("Configuration Error: Please check API keys.");
         setLoading(false);
         return;
     }
 
-    // 2. Prepare the data object
-    // This object must match the {{variables}} in BOTH templates
     const templateParams = {
-      from_name: form.name,      // Used in both templates
-      from_email: form.email,    // CRITICAL: Used for 'To Email' in Auto-Reply
-      to_name: "Md Sahebullah",  // Optional, mostly for Admin template
-      message: form.message,     // Used in both templates
+      from_name: form.name,
+      from_email: form.email,
+      message: form.message,
     };
 
-    // 3. Send Both Emails
-    Promise.all([
-      // Email to Admin
-      emailjs.send(serviceId, adminTemplateId, templateParams, publicKey),
-      // Email to User (Auto-Reply)
-      emailjs.send(serviceId, autoReplyTemplateId, templateParams, publicKey)
-    ])
-    .then(
-      () => {
-        setLoading(false);
-        alert("Thank you! I have received your message, and a confirmation email has been sent to you.");
-        setForm({
-          name: "",
-          email: "",
-          message: "",
-        });
-      },
-      (error) => {
-        setLoading(false);
-        console.error("EmailJS Error:", error);
-        alert("Something went wrong. Please try again.");
-      }
-    );
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then(
+        () => {
+          setLoading(false);
+          alert("Thank you. I will get back to you as soon as possible.");
+          setForm({
+            name: "",
+            email: "",
+            message: "",
+          });
+        },
+        (error) => {
+          setLoading(false);
+          console.error("EmailJS Error:", error);
+          alert("Something went wrong. Please try again.");
+        }
+      );
   };
 
   return (
