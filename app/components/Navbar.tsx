@@ -41,7 +41,7 @@ const Navbar = () => {
 						window.scrollTo(0, 0);
 					}}
 				>
-					<Link href="https://github.com/saheb-ul-lah/saheb-mansuri">
+					<Link href="https://github.com/saheb-ul-lah">
 						<Image
 							src="/logo.png"
 							width={80}
